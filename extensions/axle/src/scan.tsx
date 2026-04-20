@@ -1,4 +1,4 @@
-import { ActionPanel, Action, List, Detail, Icon, showToast, Toast, useNavigation } from "@raycast/api";
+import { ActionPanel, Action, List, Detail, Icon, showToast, Toast } from "@raycast/api";
 import { useEffect, useState } from "react";
 
 type AxeViolation = {
