@@ -4,3 +4,4 @@
 
 - Scan URL for Accessibility: run axe-core 4.11 against any public URL and render violations in a Raycast list grouped by severity, with links to axe-core docs.
 - Open Hebrew Accessibility Statement Generator: opens the free axle generator aligned with Israeli תקנה 35.
+<!-- Rerun CI after raycast.com username registration -->
