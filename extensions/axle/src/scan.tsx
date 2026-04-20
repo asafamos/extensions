@@ -1,13 +1,4 @@
-import {
-  ActionPanel,
-  Action,
-  List,
-  Detail,
-  Icon,
-  showToast,
-  Toast,
-  useNavigation,
-} from "@raycast/api";
+import { ActionPanel, Action, List, Detail, Icon, showToast, Toast, useNavigation } from "@raycast/api";
 import { useEffect, useState } from "react";
 
 type AxeViolation = {
@@ -52,7 +43,11 @@ export default function Scan(props: { arguments: { url: string } }) {
 
   useEffect(() => {
     const normalized = /^https?:\/\//i.test(url) ? url : `https://${url}`;
-    showToast({ style: Toast.Style.Animated, title: "Scanning", message: normalized });
+    showToast({
+      style: Toast.Style.Animated,
+      title: "Scanning",
+      message: normalized,
+    });
     fetch(`${AXLE_API}/api/scan`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -71,7 +66,11 @@ export default function Scan(props: { arguments: { url: string } }) {
       .catch((err) => {
         const msg = err instanceof Error ? err.message : "Scan failed";
         setError(msg);
-        showToast({ style: Toast.Style.Failure, title: "Scan failed", message: msg });
+        showToast({
+          style: Toast.Style.Failure,
+          title: "Scan failed",
+          message: msg,
+        });
       })
       .finally(() => setLoading(false));
   }, [url]);
@@ -81,9 +80,7 @@ export default function Scan(props: { arguments: { url: string } }) {
   }
 
   if (error) {
-    return (
-      <Detail markdown={`# Scan failed\n\n${error}`} />
-    );
+    return <Detail markdown={`# Scan failed\n\n${error}`} />;
   }
 
   if (!result) return null;
@@ -106,7 +103,9 @@ export default function Scan(props: { arguments: { url: string } }) {
             title={v.help}
             subtitle={v.id}
             accessories={[
-              { text: `${v.nodes.length} element${v.nodes.length === 1 ? "" : "s"}` },
+              {
+                text: `${v.nodes.length} element${v.nodes.length === 1 ? "" : "s"}`,
+              },
               { tag: v.impact ?? "minor" },
             ]}
             icon={IMPACT_ICON[v.impact ?? "minor"]}
@@ -114,10 +113,7 @@ export default function Scan(props: { arguments: { url: string } }) {
               <ActionPanel>
                 <Action.Push title="View Details" target={<ViolationDetail violation={v} />} />
                 <Action.OpenInBrowser title="Open WCAG Reference" url={v.helpUrl} />
-                <Action.CopyToClipboard
-                  title="Copy Rule ID"
-                  content={v.id}
-                />
+                <Action.CopyToClipboard title="Copy Rule ID" content={v.id} />
               </ActionPanel>
             }
           />
@@ -159,10 +155,7 @@ function ViolationDetail({ violation }: { violation: AxeViolation }) {
       actions={
         <ActionPanel>
           <Action.OpenInBrowser title="Open WCAG Reference" url={violation.helpUrl} />
-          <Action.CopyToClipboard
-            title="Copy Element HTML"
-            content={first?.html ?? ""}
-          />
+          <Action.CopyToClipboard title="Copy Element HTML" content={first?.html ?? ""} />
         </ActionPanel>
       }
     />
