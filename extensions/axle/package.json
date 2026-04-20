@@ -5,7 +5,10 @@
   "description": "Scan any URL for WCAG 2.1 / 2.2 AA accessibility violations without leaving Raycast. Results appear as a list; pick any violation to see the offending element and suggested fix.",
   "icon": "command-icon.png",
   "author": "asafamos",
-  "categories": ["Developer Tools", "Web"],
+  "categories": [
+    "Developer Tools",
+    "Web"
+  ],
   "license": "MIT",
   "commands": [
     {
